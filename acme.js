@@ -15,7 +15,7 @@ module.exports = opts => {
   dist = opts.dist
 
   var name = romanize(free_str),
-  url = ('http://www.acmespb.ru/'+'trade/'+romanize(free_str)),
+  url = ('http://www.acmespb.ru/'+'drug/'+romanize(free_str)),
   form = {
     whatever: 'whatever',
     name,
@@ -38,8 +38,7 @@ module.exports = opts => {
   drugDate = [],
   drugPrice = []
 
-
-
+console.log(url)
 
 return new Promise ((resolve, reject) => {
   request(postData, (e, res, body) => {
@@ -73,6 +72,7 @@ return new Promise ((resolve, reject) => {
 
     data = [drugName,drugPrice,drugDate,drugAddress,drugPharm]
     data.push($('.red').text())
+    var red = $('.red').text()
 
     if (drugName.length > 0) {
       resolve(data) 
