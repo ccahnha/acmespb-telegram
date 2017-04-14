@@ -1,9 +1,18 @@
 'use strict'
 require('./variables')
-const fs = require('fs'),
+const fs = require('fs')/*,
 TelegramBot = require('node-telegram-bot-api'),
 token = require('./token'),
-bot = new TelegramBot(token,{polling:true})
+bot = new TelegramBot(token,{polling:true})*/
+
+var TelegramBot = require('node-telegram-bot-api'),
+  port = process.env.PORT || 443,
+  host = '0.0.0.0',  // probably this change is not required
+  externalUrl = process.env.CUSTOM_ENV_VARIABLE || 'https://acmespb.herokuapp.com',
+  token = require('./token'),
+  bot = new TelegramBot(process.env.TOKEN, { webHook: { port : port, host : host } });
+bot.setWebHook(externalUrl + ':443/bot' + token);
+
 var Promise = require('bluebird'),
 startedDate = Date.now(),
 acme = require('./acme'),
@@ -34,7 +43,7 @@ function inlineMenu () {
       { text: dist_str, callback_data: 'dist' },],
       [{ text: metro_str, callback_data: 'metro' },
       { text: pharm_str, callback_data: 'pharm' },],
-      [{ text: 'Сбросить фильтры', callback_data: 'reset' }]
+      [{ text: 'Сбросить фильтры', callback_data: 'reset' }].catch(e => {return})
       ]
     }
   } else {
@@ -45,7 +54,7 @@ function inlineMenu () {
       { text: dist_str, callback_data: 'dist' },],
       [{ text: metro_str, callback_data: 'metro' },
       { text: pharm_str, callback_data: 'pharm' },],
-      [{ text: 'Сбросить фильтры', callback_data: 'reset' }]
+      [{ text: 'Сбросить фильтры', callback_data: 'reset' }].catch(e => {return})
       ]
     }
   }
@@ -136,7 +145,7 @@ bot.on('message', function (msg) {
     bot.sendMessage(msg.chat.id,'Выполняется поиск...')
     return searchDrug(msg,page)
   }
-})
+}).catch(e => {return})
 
 bot.on('callback_query', action => {
   var menu_id = {
@@ -229,7 +238,7 @@ bot.on('callback_query', action => {
     bot.editMessageReplyMarkup(JSON.stringify(inlineMenu()),menu_id)
     .catch(e => {return})
   }
-})
+}).catch(e => {return})
 
 
 console.log('Server launched at', new Date())
