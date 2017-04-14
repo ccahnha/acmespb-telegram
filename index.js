@@ -14,7 +14,6 @@ main_id = 0,
 maxresults = 0,
 page = 0
 
-
 function arrayCheck (array,id) {
   for (var i = 0; i < array.length; i++) {
     if (array[i][0] == id) {
@@ -109,27 +108,27 @@ bot.on('message', function (msg) {
     }
     switch(cmd) {
       case 'r' :
-      sreg = (reg_arr[arrayCheck(reg_arr,id)][0])
-      reg_str = (reg_arr[arrayCheck(reg_arr,id)][1])
-      bot.editMessageText(fallbackmessage,options)
+        sreg = (reg_arr[arrayCheck(reg_arr,id)][0])
+        reg_str = (reg_arr[arrayCheck(reg_arr,id)][1])
+        bot.editMessageText(fallbackmessage,options)
       break
       case 'd' :
-      dist = (dist_arr[arrayCheck(dist_arr,id)][0])
-      dist_str= (dist_arr[arrayCheck(dist_arr,id)][1])
-      bot.editMessageText(fallbackmessage,options)
+        dist = (dist_arr[arrayCheck(dist_arr,id)][0])
+        dist_str= (dist_arr[arrayCheck(dist_arr,id)][1])
+        bot.editMessageText(fallbackmessage,options)
       break
       case 'm' :
-      metro = (metro_arr[arrayCheck(metro_arr,id)][0])
-      metro_str = (metro_arr[arrayCheck(metro_arr,id)][1])
-      bot.editMessageText(fallbackmessage,options)
+        metro = (metro_arr[arrayCheck(metro_arr,id)][0])
+        metro_str = (metro_arr[arrayCheck(metro_arr,id)][1])
+        bot.editMessageText(fallbackmessage,options)
       break
       case 'p' :
-      apt_net = (pharm_arr[arrayCheck(pharm_arr,id)][0])
-      pharm_str = (pharm_arr[arrayCheck(pharm_arr,id)][1])
-      bot.editMessageText(fallbackmessage,options)
+        apt_net = (pharm_arr[arrayCheck(pharm_arr,id)][0])
+        pharm_str = (pharm_arr[arrayCheck(pharm_arr,id)][1])
+        bot.editMessageText(fallbackmessage,options)
       break
       case 'default':
-      bot.editMessageText('Синтаксическая ошибка', options)
+        bot.editMessageText('Синтаксическая ошибка', options)
     }
   } else {
     main_id = msg.message_id+1
@@ -176,63 +175,61 @@ bot.on('callback_query', action => {
     if (page > 0){
       page--
       result = 0
-      console.log(page)
       var msg = action.message
       return searchDrug(msg,page)
     } else {
       return }
-    }
-    if (action.data == 'reg') {
-      list = "Выберите регион:\n"
-      reg_arr.forEach(function(e,i,a){
-        list+= '/r' + a[i][0] + ' '+ a[i][1] + '\n'
-      })
-      fallbackmessage = action.message.text
-      bot.editMessageReplyMarkup((reply_markup),menu_id)
-      bot.editMessageText(list,menu_id)
-    }
-    if (action.data == 'dist') {
-      list = "Выберите район:\n"
-      dist_arr.forEach(function(e,i,a){
-        list+= '/d' + a[i][0] + ' '+ a[i][1] + '\n'
-      })
-      fallbackmessage = action.message.text
-      bot.editMessageReplyMarkup((reply_markup),menu_id)
-      bot.editMessageText(list,menu_id)
-    }
-    if (action.data == 'metro') {
-      list = "Выберите станцию метро:\n"
-      metro_arr.forEach(function(e,i,a){
-        list+= '/m' + a[i][0] + ' '+ a[i][1] + '\n'
-      })
-      fallbackmessage = action.message.text
-      bot.editMessageReplyMarkup((reply_markup),menu_id)
-      bot.editMessageText(list,menu_id)
-    }
-    if (action.data == 'pharm') {
-      list = "Выберите аптеку:\n"
-      pharm_arr.forEach(function(e,i,a){
-        list+= '/p' + a[i][0] + ' '+ a[i][1] + '\n'
-      })
-      fallbackmessage = action.message.text
-      bot.editMessageReplyMarkup((reply_markup),menu_id)
-      bot.editMessageText(list,menu_id)
-    }
-    if (action.data == 'reset') {
-      sreg = 0
-      dist = 0
-      metro = 0
-      apt_net = 0
-      reg_str = 'Выбрать регион'
-      dist_str = 'Выбрать район'
-      metro_str = 'Выбрать метро'
-      pharm_str = 'Выбрать аптеку'
-
-      bot.editMessageReplyMarkup(JSON.stringify(inlineMenu()),menu_id)
-      .catch(e => {return})
-    }
   }
-)}
+  if (action.data == 'reg') {
+    list = "Выберите регион:\n"
+    reg_arr.forEach(function(e,i,a){
+      list+= '/r' + a[i][0] + ' '+ a[i][1] + '\n'
+    })
+    fallbackmessage = action.message.text
+    bot.editMessageReplyMarkup((reply_markup),menu_id)
+    bot.editMessageText(list,menu_id)
+  }
+  if (action.data == 'dist') {
+    list = "Выберите район:\n"
+    dist_arr.forEach(function(e,i,a){
+      list+= '/d' + a[i][0] + ' '+ a[i][1] + '\n'
+    })
+    fallbackmessage = action.message.text
+    bot.editMessageReplyMarkup((reply_markup),menu_id)
+    bot.editMessageText(list,menu_id)
+  }
+  if (action.data == 'metro') {
+    list = "Выберите станцию метро:\n"
+    metro_arr.forEach(function(e,i,a){
+      list+= '/m' + a[i][0] + ' '+ a[i][1] + '\n'
+    })
+    fallbackmessage = action.message.text
+    bot.editMessageReplyMarkup((reply_markup),menu_id)
+    bot.editMessageText(list,menu_id)
+  }
+  if (action.data == 'pharm') {
+    list = "Выберите аптеку:\n"
+    pharm_arr.forEach(function(e,i,a){
+      list+= '/p' + a[i][0] + ' '+ a[i][1] + '\n'
+    })
+    fallbackmessage = action.message.text
+    bot.editMessageReplyMarkup((reply_markup),menu_id)
+    bot.editMessageText(list,menu_id)
+  }
+  if (action.data == 'reset') {
+    sreg = 0
+    dist = 0
+    metro = 0
+    apt_net = 0
+    reg_str = 'Выбрать регион'
+    dist_str = 'Выбрать район'
+    metro_str = 'Выбрать метро'
+    pharm_str = 'Выбрать аптеку'
+
+    bot.editMessageReplyMarkup(JSON.stringify(inlineMenu()),menu_id)
+    .catch(e => {return})
+  }
+})
 
 
 console.log('Server launched at', new Date())

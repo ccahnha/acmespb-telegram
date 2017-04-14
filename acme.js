@@ -38,8 +38,6 @@ module.exports = opts => {
   drugDate = [],
   drugPrice = []
 
-console.log(url)
-
 return new Promise ((resolve, reject) => {
   request(postData, (e, res, body) => {
     if (!e && res.statusCode !== 200) {
