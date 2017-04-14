@@ -75,16 +75,9 @@ return new Promise ((resolve, reject) => {
     var red = $('.red').text()
 
     if (drugName.length > 0) {
-      resolve(data) 
-    } else {
-      reject(red)
-    }
+      resolve(data)}
+     else {
+      reject(red)}
+    })
   })
-})
-
 }
-
-
-//  console.log($('#container .trow').eq(1).remove('.tocart').html())
-//  console.log($('.trow .cell.name').text())
-//  console.log($('.trow .cell.name').text())
