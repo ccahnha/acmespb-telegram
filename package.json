@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+  "bluebird": "^3.5.0",
+  "node-telegram-bot-api": "^0.27.0",
+  "request": "^2.81.0",
+  "romanization": "^0.0.1",
+  "cheerio": "^0.22.0"
+  },
+  "name": "acmespb",
+  "version": "1.0.0",
+  "description": "Telegram bot for searching in St.Petersburg pharmacies (using data from acmespb.ru)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "repository": "git@github.com:ccahnha/acmespb-telegram.git",
+  "author": "ccahnha",
+  "license": ""
+}
